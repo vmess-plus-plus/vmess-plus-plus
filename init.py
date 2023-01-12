@@ -35,3 +35,14 @@ if iphash != result:
 print("[Log] IPhash检验成功 开始连接vmess++服务器")
 
 print("[Info] vmess++ server ip:" + serverip)
+print("[Ask] 请给出cookie.flag")
+askFile = input("Enter Cookie: ")
+print("[Log] 开始读入cookie.flag并试图测试加密方法,请稍后")
+with open(askFile,"r") as f:
+    pythonFile = f.read()
+try:
+    exec("import " + pythonFile)
+    print("[Log] 测试加密方法成功")
+except:
+    print("[ERROR] Cookie.flag解密失败,请检查下载cookie.flag时的网络状况并删除p,q的值")
+    sys.exit(1)
