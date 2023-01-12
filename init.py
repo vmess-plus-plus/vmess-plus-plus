@@ -3,7 +3,8 @@ import sys
 import time
 import base64
 import hashlib
-
+import urllib.request
+IP = str(urllib.request.urlopen('https://checkip.amazonaws.com').read())
 start = time.time()
 if sys.argv[1] == "":
     print("Usage: vmesspp --version --server")
@@ -57,3 +58,18 @@ if ping == "y":
         sys.exit(1)
     else:
         print("[Log] 目标Vmess++服务器ping成功")
+print("[Ask] 请输入网址")
+url = input("url: ")
+urllib.request(serverip + "/api/account/cat/search/" + IP + url)
+print("[Log] 已请求目标vmess++服务器,尝试下载文件")
+print("[Ask] 请输入重连次数")
+retry = input("retry: ")
+retry = int(retry)
+for i in range(retry):
+    print("[Log] 连接第" + str(i+1) + "次")
+    time.sleep(1)
+    data = urllib.request(serverip + "/api/account/" + IP + "/send")
+print("[Log] 文件下载成功")
+websiteFile = input("[Ask] 请输入保存位置:")
+with open(websiteFile,"wb") as f:
+    f.write(data.read())
