@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import base64
@@ -46,3 +47,13 @@ try:
 except:
     print("[ERROR] Cookie.flag解密失败,请检查下载cookie.flag时的网络状况并删除p,q的值")
     sys.exit(1)
+print("[Log] Cookie.flag解密成功,准备vmess++服务器")
+print("[Ask] 目标Vmess++服务器是否允许ping?")
+ping = input("y/n: ")
+if ping == "y":
+    network = os.system("ping " + servermsg[1] + " >nul")
+    if(network):
+        print("[ERROR] 目标Vmess++服务器无法连接")
+        sys.exit(1)
+    else:
+        print("[Log] 目标Vmess++服务器ping成功")
